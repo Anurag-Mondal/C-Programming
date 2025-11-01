@@ -26,6 +26,7 @@ int main () {
     printf ("Enter  Tier of Mewtow: ");
     scanf ("%c",&mewtow.tier);
     printf ("The tier of Mewtow is %c",mewtow.tier);
+    hi
 
     return 0;
 }
