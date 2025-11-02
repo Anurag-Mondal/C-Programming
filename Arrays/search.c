@@ -18,7 +18,7 @@ for (int i = 0; i <= 9; i++) {   // This is linear search method.
     }
 }
 
-if ( flag == false) printf ("%d is not present.",x);
+if (flag == false) printf ("%d is not present.",x);
 else printf ("%d is present and its index is %d.",x,index);
 
     return 0;
