@@ -10,7 +10,7 @@ int main () {       // () is reserved for functions, [] is used for arrays
     arrr[3] = 8.9;         // Updation of value at index 3
     printf ("%f\n",arrr[3]);
 
-    char arrrr[5] = {'a','b','c','d','e'}; // Character array
+    char arrrr[5] = {'a','b','c','d','e'}; // Character array (String)
     arrrr[2] = 'g';          // Updation of value at index 2
     printf ("%c\n",arrrr[2]);
 

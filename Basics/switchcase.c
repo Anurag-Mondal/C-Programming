@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main () {
     int n;
-    printf ("ENTER NO. FROM 1 TO 12 :");
+    printf ("ENTER NO. FROM 1 TO 12: ");
     scanf ("%d",&n);
     switch (n) {
     case 1:

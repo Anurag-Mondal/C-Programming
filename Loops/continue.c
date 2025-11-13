@@ -7,7 +7,7 @@ int main () {
         if (i%2 != 0) {
             continue;
         }
-         printf ("\n%d ",i);
+        printf ("\n%d ",i);
     }
     return 0;
 }
