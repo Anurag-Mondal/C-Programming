@@ -1,0 +1,88 @@
+Static: which means that the memory is allocated during
+compile time.
+
+Dynamic: which means that the memory is allocated during run
+time.
+
+In stack segment, all the frames are stored in contiguous memory.
+Since the compiler was unaware of the new memory needs and it
+initiated a stack frame with what knowledge it had during the compile
+time, if the new memory requirements exceeds that of the stack frame
+memory, it would result in memory needs exceeded!
+
+Hence, such a runtime allocation in stack, though allowed
+some compilers is not recommended as it could lead to
+unwanted exceptions in the program during runtime.
+So, a program below is not a recommended one:
+
+int main() {
+int n;
+scanf("%d", &n);
+int arr[n];
+}
+
+This problem can be solved by dynamic memory allocation.
+
+Now, we introduce yet another segment of the memory, called
+Heap Segment.
+Heap Segment of the memory is the free memory which is
+available to any C program. It is a large memory space available
+where dynamic allocation usually takes place.
+As a programmer, it gives us a lot of POWER to allocate memory
+and deallocate memory on our own and depending on our needs
+even during compile time.
+
+Operations for dynamic allocation
+
+We can do any possible task with the help of the following operations:
+
+Memory Allocation:
+To allocate memory in Heap
+malloc(), calloc(), One difference between malloc() and calloc() is that calloc()
+initialises all the allocated memory blocks with value 0, unlike
+malloc() in which blocks allocated have garbage value.
+
+To allocate a memory for 100 integer:
+int * ptr = (int *) malloc (100*sizeof(int)); OR
+int * ptr = (int *) malloc (100*4);
+
+To allocate a memory for 1000 characters:
+char *ptr = (char *) malloc (1000 * sizeof(char)); OR
+char *ptr = (char *) malloc (1000 * 1);
+
+To allocate a memory for 25 floating numbers:
+float *ptr = (float *) calloc (25, sizeof(float)); OR
+float *ptr = (float *) calloc (25, 4);
+
+To allocate a memory for 1000 characters:
+char *ptr = (char *) calloc (1000, sizeof(char)); OR
+char *ptr = (char *) calloc (1000, sizeof(char));
+
+One difference between malloc() and calloc() is that calloc()
+initialises all the allocated memory blocks with value 0, unlike
+malloc() in which blocks allocated have garbage value.
+____________________________________________________________________________
+
+Memory Deallocation:
+To deallocate the trapped memory:
+int *ptr = (int *) malloc (8 * sizeof(int));
+free(ptr);
+
+Memory deallocated but ptr refers to a memory which now
+does not belong to us, hence ptr (dangling pointer) should b to NULL.
+ptr = NULL;
+____________________________________________________________________________
+
+Memory Re-allocation:
+To change the amount of memory allocated:
+int *ptr = (int *) malloc (8 * sizeof(int));
+ptr = realloc(ptr, 10* 4);
+
+Note: The data stored remains intact. Just the allocated memory
+increased. Hence, it allows allocation according to our needs
+without making us lose the data stored in the initial 20 bytes. Hence,
+it is different from malloc() and calloc().
+After rellocation the memory is assigned continuously from where ended before.
+But if the updated value is very large and space is not available, then a new
+location is allocated.
+_______________________________________________________________________________
