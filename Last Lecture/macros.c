@@ -3,4 +3,5 @@
 int main () {
     double x = pi; // double can store upto 15 to 16 decimal values
     printf ("%.15f",x); 
+    return 0;
 }
