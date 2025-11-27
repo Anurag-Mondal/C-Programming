@@ -1,24 +1,24 @@
 #include <stdio.h>
 
-int factorial (int x) {
-    if (x == 0) return 1;
-    return x * factorial(x - 1);
-}
-
-void a (int* ans, int n) {
-    *ans = factorial(n);
-    return;
+int fibonacci (int n) {
+    if (n == 0) return 0;
+    if (n == 1 || n == 2) return 1;
+    return fibonacci(n-1) + fibonacci(n-2);
 }
 
 int main() {
-    int n, ans;
+    int n;
 
     printf("Enter n: ");
     scanf("%d", &n);
 
-    a (&ans, n);
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        int f = (fibonacci(i) * fibonacci(i)) + (10 * fibonacci(i));
+        sum += f;
+    }
 
-    printf("Factorial = %d\n", ans);
+    printf("%d", sum);
 
     return 0;
 }
