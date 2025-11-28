@@ -27,6 +27,6 @@ int main () {
     char d [] = "Hello";
     char e [] = "Bro";
     int x = strcmp (d,e);
-    printf ("%d\n",x); // Will print 1
+    printf ("%d\n",x); // Will print 1 
     return 0;
 }
