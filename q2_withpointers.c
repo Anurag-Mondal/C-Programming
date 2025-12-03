@@ -1,17 +1,19 @@
 #include <stdio.h>
 
-void string (char strr [], int n, int m) {
+void string (char* strr , int n, int m) {
     if (n == 0) return;
+    char* p = strr;
     int x = (m-n);
     
     for (int i = x; i <= m; i++) {
-        printf ("%c",strr[i]);
+        printf ("%c",*(strr+i));
     }
 
     if (n>1) printf (" -> ");
-    string (strr, (n-1),m);
+    string (p, (n-1),m);        // Recursion
     return;
 }
+
 int main () {
 
     char str [100];
