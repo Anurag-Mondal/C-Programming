@@ -14,14 +14,14 @@ int main () {
     pikachu.attack = 60;
     pikachu.hp = 50;
     pikachu.speed = 100;
-    pikachu.speed = 'A';
+    pikachu.tier = 'A';
 
     struct pokemon charizard;
     strcpy (charizard.name,"Charizard"); // Way to take input in string
     charizard.attack = 130;
     charizard.hp = 80;
     charizard.speed = 80;
-    charizard.speed = 'S';
+    charizard.tier = 'S';
 
     // No need to write 'struct pokemon mewtow'
     strcpy (mewtow.name,"Mewtow"); // // Way to take input in string

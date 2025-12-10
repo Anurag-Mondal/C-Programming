@@ -28,7 +28,7 @@ void string (char strr[], int n) {
 }
 
 int main() {
-    char str[100];
+    char str[1000];
     printf("Enter a sentence: ");
     gets(str);
 
