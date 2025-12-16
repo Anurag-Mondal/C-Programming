@@ -13,7 +13,7 @@ void change (pokemon* p) {
     (*p).speed = 110;
     p->attack = 110;        // Another Method (Method 2)
     p->tier = 'S';          // ''       ''      ''
-    strcpy ((*p).name,"Pikachu");
+    strcpy ((p->name),"Pikachuu");
 }
 
 int main() {

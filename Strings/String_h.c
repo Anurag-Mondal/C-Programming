@@ -14,7 +14,7 @@ int main () {
                     // To solve use scanf ("%[^\n]s",str) (Not Recommended)
 
     puts (str); // Only first word is printed.
-
+    getchar ();
     gets (str); // Now entire sentence can be taken input (Recommended)
     puts (str);
 

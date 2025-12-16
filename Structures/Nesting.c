@@ -16,8 +16,8 @@ int main() {
     } legendarypokemon ;
 
     typedef struct godpokemon {
-    legendarypokemon legend;
-    int specialattack;
+        legendarypokemon legend;
+        int specialattack;
     } godpokemon;
 
     godpokemon arceus; // *********
