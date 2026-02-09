@@ -11,7 +11,7 @@ typedef struct {
 void initStack(Stack_Array* s, int capacity) {
     s->capacity = capacity;
     s->topIndex = -1;
-    int* arr = (int*)malloc(sizeof(int) * capacity);
+    s->stackArr = (int*)malloc(sizeof(int) * capacity);
 }
 
 /* Print stack */
