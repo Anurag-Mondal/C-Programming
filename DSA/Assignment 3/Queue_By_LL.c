@@ -1,47 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* Node structure */
 typedef struct Node {
     int data;
     struct Node* next;
 } Node;
 
-/* Queue structure */
 typedef struct {
     Node* start;
     Node* end;
     int size;
 } Queue;
 
-/* Constructor equivalent */
-void initQueue(Queue* q) {
+void start_Queue(Queue* q) {
     q->start = NULL;
     q->end = NULL;
     q->size = 0;
 }
 
-/* Push (enqueue) */
-void push(Queue* q, int x) {
+void EnQueue(Queue* q, int x) {
     Node* temp = (Node*)malloc(sizeof(Node));
     temp->data = x;
     temp->next = NULL;
 
-    if (q->size == 0) {   // first element
+    if (q->size == 0) {
         q->start = temp;
         q->end = temp;
-        q->size++;
-        return;
+    } else {
+        q->end->next = temp;
+        q->end = temp;
     }
-    q->end->next = temp;
-    q->end = temp;
     q->size++;
 }
 
-/* Print queue */
 void print(Queue* q) {
     if (q->size == 0) {
-        printf("Queue is empty\n");
+        printf("Queue is empty\n\n");
         return;
     }
     Node* temp = q->start;
@@ -49,66 +43,105 @@ void print(Queue* q) {
         printf("%d ", temp->data);
         temp = temp->next;
     }
-    printf("\n");
+    printf("\n\n");
 }
 
-/* Front element */
-int top(Queue* q) {
+int peak(Queue* q) {
     if (q->size == 0) {
-        printf("Queue is empty\n");
+        printf("Queue is empty\n\n");
         return -1;
     }
     return q->start->data;
 }
 
-/* Pop (dequeue) */
-void pop(Queue* q) {
+void DeQueue(Queue* q) {
     if (q->size == 0) {
-        printf("Queue is empty\n");
-        return;
-    }
-
-    if (q->size == 1) {
-        free(q->start);
-        q->start = NULL;
-        q->end = NULL;
-        q->size--;
+        printf("Queue is empty\n\n");
         return;
     }
 
     Node* temp = q->start;
     q->start = q->start->next;
+
+    if (q->start == NULL)
+        q->end = NULL;
+
     free(temp);
     q->size--;
 }
 
-/* Size */
+void is_empty(Queue* q) {
+    if (q->size == 0)
+        printf("Yes\n\n");
+    else
+        printf("No\n\n");
+}
+
+void rear(Queue* q) {
+    if (q->size == 0) {
+        printf("Queue is empty\n\n");
+    }
+    else 
+        printf("%d\n\n",q->end->data);
+}
+
 int Size(Queue* q) {
     return q->size;
 }
 
 int main() {
     Queue q1;
-    initQueue(&q1);
+    start_Queue(&q1);
 
-    print(&q1); // Queue is empty
+    int choice;
 
-    push(&q1, 1);
-    print(&q1); // 1
+    printf("Press 1 to EnQueue\nPress 2 to DeQueue\nPress 3 to Peak\nPress 4 for Size\nPress 5 to check if empty\nPress 6 to Print\nPress 7 for last element\nPress 0 to Exit\n\n");
 
-    push(&q1, 2);
-    print(&q1); // 1 2
+    scanf("%d",&choice);
+    printf("\n");
 
-    push(&q1, 3);
-    print(&q1); // 1 2 3
+    while (choice != 0) {
+        int a;
+        switch (choice) {
 
-    printf("%d\n", top(&q1));   // 1
-    printf("%d\n", Size(&q1));  // 3
+        case 1:
+            printf("Enter element to EnQueue: ");
+            scanf("%d",&a);
+            EnQueue(&q1,a);
+            printf("\n");
+            break;
 
-    pop(&q1);
-    printf("%d\n", top(&q1));   // 2
-    printf("%d\n", Size(&q1));  // 2
-    print(&q1);                 // 2 3
+        case 2:
+            DeQueue(&q1);
+            break;
 
+        case 3:
+            printf("%d\n\n", peak(&q1));
+            break;
+
+        case 4:
+            printf("%d\n\n", Size(&q1));
+            break;
+
+        case 5:
+            is_empty(&q1);
+            break;
+
+        case 6:
+            print(&q1);
+            break;
+        
+        case 7:
+            rear(&q1);
+            break;
+        
+        default:
+            printf("Invalid input\n\n");
+        }
+
+        printf("Press 1 to EnQueue\nPress 2 to DeQueue\nPress 3 to Peak\nPress 4 for Size\nPress 5 to check if empty\nPress 6 to Print\nPress 7 for last element\nPress 0 to Exit\n\n");
+        scanf("%d",&choice);
+        printf("\n");
+    }
     return 0;
 }

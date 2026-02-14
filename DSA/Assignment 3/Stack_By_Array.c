@@ -7,77 +7,121 @@ typedef struct {
     int* stackArr;
 } Stack_Array;
 
-/* Constructor equivalent */
-void initStack(Stack_Array* s, int capacity) {
+void start_Stack(Stack_Array* s, int capacity) {
     s->capacity = capacity;
     s->topIndex = -1;
     s->stackArr = (int*)malloc(sizeof(int) * capacity);
 }
 
-/* Print stack */
-void print(Stack_Array* s) {
-    if (s->topIndex == -1) {
-        printf("The stack is empty\n");
-        return;
-    }
-    for (int i = 0; i <= s->topIndex; i++) {
-        printf("%d ", s->stackArr[i]);
-    }
-    printf("\n");
-}
-
-/* Push */
 void push(Stack_Array* s, int x) {
     if (s->topIndex >= s->capacity - 1) {
-        printf("Stack Overflow\n");
+        printf("Stack Overflow\n\n");
         return;
     }
     s->stackArr[++(s->topIndex)] = x;
 }
 
-/* Pop */
 void pop(Stack_Array* s) {
-    if (s->topIndex == -1)
+    if (s->topIndex == -1) {
+        printf("Stack Underflow\n\n");
         return;
+    }
     s->topIndex--;
 }
 
-/* Top */
-int top(Stack_Array* s) {
+void peak(Stack_Array* s) {
     if (s->topIndex == -1) {
-        printf("Stack is empty\n");
-        return -1;
+        printf("Stack is empty\n\n");
+        return;
     }
-    return s->stackArr[s->topIndex];
+    printf("%d\n\n", s->stackArr[s->topIndex]);
 }
 
-/* Size */
-int size(Stack_Array* s) {
-    return s->topIndex + 1;
+void Stack_Size(Stack_Array* s) {
+    printf("%d\n\n", s->topIndex + 1);
+}
+
+void is_Empty(Stack_Array* s) {
+    if (s->topIndex == -1)
+        printf("Yes\n\n");
+    else
+        printf("No\n\n");
+}
+
+void is_Full(Stack_Array* s) {
+    if (s->topIndex == s->capacity - 1)
+        printf("Yes\n\n");
+    else
+        printf("No\n\n");
+}
+
+void Print(Stack_Array* s) {
+    if (s->topIndex == -1) {
+        printf("Stack is empty\n\n");
+        return;
+    }
+    for (int i = 0; i <= s->topIndex; i++) {
+        printf("%d ", s->stackArr[i]);
+    }
+    printf("\n\n");
 }
 
 int main() {
     Stack_Array s1;
-    initStack(&s1, 10);
+    int n; 
+    printf("Enter size of stack: ");
+    scanf("%d", &n);
 
-    print(&s1); // The stack is empty
+    start_Stack(&s1, n);
 
-    push(&s1, 1);
-    print(&s1); // 1
+    int choice;
+    printf("Press 1 to push\nPress 2 to pop\nPress 3 to top\nPress 4 for size\nPress 5 to check if empty\nPress 6 to check if full\nPress 7 to print all\nPress 0 to exit\n\n");
+    scanf("%d", &choice);
+    printf("\n");
 
-    push(&s1, 2);
-    print(&s1); // 1 2
+    while (choice != 0) {
+        int a;
+        switch (choice) {
+        case 1:
+            printf("Enter element to push: "); 
+            scanf("%d", &a);
+            push(&s1, a);
+            printf("\n");
+            break;
 
-    push(&s1, 3);
-    print(&s1); // 1 2 3
+        case 2:
+            pop(&s1);
+            break;
 
-    printf("%d\n", top(&s1));  // 3
-    printf("%d\n", size(&s1)); // 3
+        case 3:
+            peak(&s1);
+            break;
 
-    pop(&s1);
-    printf("%d\n", size(&s1)); // 2
-    print(&s1); // 1 2
+        case 4:
+            Stack_Size(&s1);
+            break;
 
-    free(s1.stackArr); // cleanup
+        case 5:
+            is_Empty(&s1);
+            break;
+
+        case 6:
+            is_Full(&s1);
+            break;
+
+        case 7:
+            Print(&s1);
+            break;
+
+        default:
+            printf("Invalid input\n\n");
+            break;
+        }
+
+        printf("Press 1 to push\nPress 2 to pop\nPress 3 to top\nPress 4 for size\nPress 5 to check if empty\nPress 6 to check if full\nPress 7 to print all\nPress 0 to exit\n\n");
+        scanf("%d", &choice);
+    }
+
+    free(s1.stackArr);
     return 0;
 }
