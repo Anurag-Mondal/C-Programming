@@ -14,7 +14,7 @@ void enqueue(int value) {
     else {
         rear = (rear + 1) % SIZE;
     }
-
+    
     queue[rear] = value;
     printf("%d inserted\n", value);
 }
