@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void dfs(int adj[100][100], int visited[], int V, int v) {
+void dfs(int adj[100][100], int visited[100], int V, int v) {
     visited[v] = 1;
     for (int i = 0; i < V; i++) {
         if (adj[v][i] == 1 && visited[i] == 0) {
