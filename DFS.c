@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-#define MAX 100
-
-int stack[MAX], top = -1;
+int stack[100], top = -1;
 
 void push(int x) {
     stack[++top] = x;
@@ -16,8 +14,8 @@ int isEmpty() {
     return top == -1;
 }
 
-void dfs(int adj[MAX][MAX], int n, int start) {
-    int visited[MAX] = {0};
+void dfs(int adj[100][100], int n, int start) {
+    int visited[100] = {0};
 
     push(start);
 
@@ -38,17 +36,20 @@ void dfs(int adj[MAX][MAX], int n, int start) {
 }
 
 int main() {
-    int n = 5;
+    int V, E;
+    printf("enter the number of the vertices and edges respectively\n");
+    scanf("%d %d", &V, &E);
 
-    int adj[MAX][MAX] = {
-        {0,1,1,0,0},
-        {1,0,0,1,1},
-        {1,0,0,0,0},
-        {0,1,0,0,0},
-        {0,1,0,0,0}
-    };
+    int adj[100][100] = {0};
 
-    dfs(adj, n, 0);
+    for (int i = 0; i < E; i++) {
+        int u, v;
+        printf("enter the vertices (u v) : ");
+        scanf("%d %d", &u, &v);
+        adj[u][v] = adj[v][u] = 1;
+    }
+
+    dfs(adj, V, 0);
 
     return 0;
 }
