@@ -12,12 +12,14 @@ void dfs(int adj[100][100], int visited[], int V, int v) {
 
 int main() {
     int V, E;
+    printf("enter the number of the vertices and edges respectively\n");
     scanf("%d %d", &V, &E);
 
     int adj[100][100] = {0};
 
     for (int i = 0; i < E; i++) {
         int u, v;
+        printf("enter the vertices (u v) : ");
         scanf("%d %d", &u, &v);
         adj[u][v] = adj[v][u] = 1;
     }
