@@ -11,7 +11,8 @@ int pop() {
 }
 
 int isEmpty() {
-    return top == -1;
+    if(top == -1) return 1;
+    else return 0;
 }
 
 void dfs(int adj[100][100], int n, int start) {
@@ -22,12 +23,12 @@ void dfs(int adj[100][100], int n, int start) {
     while (!isEmpty()) {
         int node = pop();
 
-        if (!visited[node]) {
+        if (visited[node] == 0) {
             printf("%d ", node);
             visited[node] = 1;
 
             for (int i = n - 1; i >= 0; i--) {
-                if (adj[node][i] == 1 && !visited[i]) {
+                if (adj[node][i] == 1 && visited[i] == 0) {
                     push(i);
                 }
             }

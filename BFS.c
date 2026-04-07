@@ -1,117 +1,55 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-struct Node {
-    int data;
-    struct Node* next;
-};
+int queue[100], front = -1, rear = -1;
 
-struct QNode {
-    int data;
-    struct QNode* next;
-};
-
-struct QNode *front = NULL, *rear = NULL;
-
-struct Node* createNode(int v) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = v;
-    newNode->next = NULL;
-    return newNode;
-}
-
-void enqueue(int value) {
-    struct QNode* temp = (struct QNode*)malloc(sizeof(struct QNode));
-    temp->data = value;
-    temp->next = NULL;
-
-    if (rear == NULL) {
-        front = rear = temp;
-        return;
-    }
-
-    rear->next = temp;
-    rear = temp;
+void enqueue(int x) {
+    if (front == -1) front = 0;
+    queue[++rear] = x;
 }
 
 int dequeue() {
-    if (front == NULL)
-        return -1;
-
-    struct QNode* temp = front;
-    int value = temp->data;
-
-    front = front->next;
-    if (front == NULL)
-        rear = NULL;
-
-    free(temp);
-    return value;
+    return queue[front++];
 }
 
-void addEdge(struct Node* adj[], int u, int v) {
-    struct Node* newNode = createNode(v);
-    newNode->next = adj[u];
-    adj[u] = newNode;
-
-    newNode = createNode(u);
-    newNode->next = adj[v];
-    adj[v] = newNode;
+int isEmpty() {
+    if (front == -1 || front > rear) return 1;
+    else return 0;
 }
 
-void BFS(struct Node* adj[], int n, int start) {
-    int visited[n];
-
-    for (int i = 0; i < n; i++)
-        visited[i] = 0;
+void bfs(int adj[100][100], int n, int start) {
+    int visited[100] = {0};
 
     enqueue(start);
     visited[start] = 1;
 
-    printf("BFS Traversal: ");
-
-    while (front != NULL) {
+    while (!isEmpty()) {
         int node = dequeue();
         printf("%d ", node);
 
-        struct Node* temp = adj[node];
-
-        while (temp != NULL) {
-            if (visited[temp->data] == 0) {
-                enqueue(temp->data);
-                visited[temp->data] = 1;
+        for (int i = 0; i < n; i++) {
+            if (adj[node][i] == 1 && visited[i] == 0) {
+                enqueue(i);
+                visited[i] = 1;
             }
-            temp = temp->next;
         }
     }
 }
 
 int main() {
-    int n, edges;
+    int V, E;
+    printf("enter the number of the vertices and edges respectively\n");
+    scanf("%d %d", &V, &E);
 
-    printf("Enter number of vertices: ");
-    scanf("%d", &n);
+    int adj[100][100] = {0};
 
-    struct Node* adj[n];
-
-    for (int i = 0; i < n; i++)
-        adj[i] = NULL;
-
-    printf("Enter number of edges: ");
-    scanf("%d", &edges);
-
-    for (int i = 0; i < edges; i++) {
+    for (int i = 0; i < E; i++) {
         int u, v;
-        printf("Enter edge (u v): ");
+        printf("enter the vertices (u v) : ");
         scanf("%d %d", &u, &v);
-        addEdge(adj, u, v);
+        adj[u][v] = adj[v][u] = 1;
     }
 
-    int start;
-    printf("Enter starting vertex: ");
-    scanf("%d", &start);
-
-    BFS(adj, n, start);
+    bfs(adj, V, 0);
 
     return 0;
 }
